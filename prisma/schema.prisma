@@ -24,7 +24,8 @@ model User {
 model Producto {
   id       String   @id @default(uuid())
   nombre   String
-  valor    Decimal
+  ImgURL   String
+  valor    Decimal  @db.Decimal(10, 3)
   cantidad Int
   Ventas   Ventas[]
 }
@@ -34,6 +35,7 @@ model Ventas {
   usuario    User       @relation(fields: [usuarioId], references: [id])
   usuarioId  String
   productos  Producto[]
+  total      Decimal    @db.Decimal(10, 3)
   cantidad   Int
   fechaVenta DateTime   @default(now())
 }

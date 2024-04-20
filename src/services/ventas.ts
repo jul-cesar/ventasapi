@@ -6,17 +6,18 @@ import { editProducto } from "./productos";
 interface createVentaResponse {
   success: boolean;
   Venta?: Ventas;
+
   errorMessage?: string;
 }
 
 export const createVenta = async (
   dataV: Venta
 ): Promise<createVentaResponse> => {
+  let totalVenta: number = 0;
   try {
     for (let { id } of dataV.productos) {
       const producto = await prisma.producto.findUnique({
         where: { id },
-        select: { cantidad: true },
       });
 
       if (!producto) {
@@ -29,6 +30,7 @@ export const createVenta = async (
           errorMessage: `La cantidad de compra para el producto con id ${id} es mayor a la cantidad disponible`,
         };
       }
+      totalVenta += dataV.cantidad * Number(producto.valor);
     }
     for (let producto of dataV.productos) {
       await editProducto(producto.id ?? "", dataV.cantidad);
@@ -41,6 +43,7 @@ export const createVenta = async (
         productos: {
           connect: dataV.productos.map((producto) => ({ id: producto.id })),
         },
+        total: totalVenta,
       },
     });
     return { success: true, Venta: newVenta };

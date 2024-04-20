@@ -1,9 +1,7 @@
-import { Venta } from "./venta"
-
 export interface Producto {
-    id?: string
-    nombre: string
-    valor: number
-    cantidad: number
-    
+  id?: string;
+  nombre: string;
+  ImgURL: string;
+  valor: number;
+  cantidad: number;
 }

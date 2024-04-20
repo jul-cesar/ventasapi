@@ -7,7 +7,7 @@ export const createVentaController = async (req: Request, res: Response) => {
     if (!response.success) {
       res.status(403).send(response.errorMessage);
     }
-    res.send(response);
+    res.send(response.Venta);
   } catch (error) {
     console.error(error);
   }

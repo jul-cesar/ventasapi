@@ -18,5 +18,3 @@ export const crearProductoController = async (req: Request, res: Response) => {
     console.error(error);
   }
 };
-
-
