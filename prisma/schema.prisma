@@ -22,11 +22,11 @@ model User {
 }
 
 model Producto {
-  id       String    @id @default(uuid())
+  id       String   @id @default(uuid())
   nombre   String
   valor    Decimal
   cantidad Int
-  Ventas   Ventas[]  
+  Ventas   Ventas[]
 }
 
 model Ventas {

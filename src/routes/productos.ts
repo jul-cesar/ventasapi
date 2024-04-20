@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   crearProductoController,
   getProductosController,
-} from "../controladores/productos";
+} from "../controller/productos";
 
 export const productosRoute = Router();
 

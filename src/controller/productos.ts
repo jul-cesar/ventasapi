@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createProducto, getProductos } from "../servicios/productos";
+import { createProducto, getProductos } from "../services/productos";
 
 export const getProductosController = async (req: Request, res: Response) => {
   try {
@@ -18,3 +18,5 @@ export const crearProductoController = async (req: Request, res: Response) => {
     console.error(error);
   }
 };
+
+
