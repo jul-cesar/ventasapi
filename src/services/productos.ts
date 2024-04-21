@@ -3,9 +3,15 @@ import { Producto } from "../models/producto";
 
 export const getProductos = async () => {
   const productos = await prisma.producto.findMany({
-    include: { Ventas: true},
+    include: { Ventas: true },
   });
-  return productos;
+
+  const productosCorrectos = productos.map((p) => ({
+    ...p,
+    valor: p.valor.toFixed(3),
+  }));
+
+  return productosCorrectos;
 };
 
 export const createProducto = async (data: Producto) => {

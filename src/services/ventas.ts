@@ -52,10 +52,20 @@ export const createVenta = async (
     return { success: false, errorMessage: "error al hacer la venta" };
   }
 };
-
 export const getVentas = async () => {
-  const ventas = prisma.ventas.findMany({
+  const ventas = await prisma.ventas.findMany({
     include: { productos: true, usuario: true },
+    orderBy: { fechaVenta: "desc" },
   });
-  return ventas;
+
+  const ventasCorrectas = ventas.map((v) => ({
+    ...v,
+    total: v.total.toFixed(3),
+    productos: v.productos.map((p) => ({
+      ...p,
+      valor: p.valor.toFixed(3),
+    })),
+   
+  }));
+  return ventasCorrectas;
 };
