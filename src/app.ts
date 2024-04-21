@@ -6,11 +6,11 @@ import { ventasRouter } from "./routes/ventas";
 import { usariosRouter } from "./routes/usuarios";
 
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
-app.use(cors());
 app.use(productosRoute);
 app.use(ventasRouter);
-app.use(usariosRouter)
+app.use(usariosRouter);
 
 const PORT = process.env.PORT || 3000;
 

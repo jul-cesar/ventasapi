@@ -54,6 +54,8 @@ export const createVenta = async (
 };
 
 export const getVentas = async () => {
-  const ventas = prisma.ventas.findMany({ include: { productos: true } });
+  const ventas = prisma.ventas.findMany({
+    include: { productos: true, usuario: true },
+  });
   return ventas;
 };
